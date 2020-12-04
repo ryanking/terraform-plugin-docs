@@ -450,6 +450,7 @@ func (g *generator) terraformProviderSchema(ctx context.Context, providerName st
 	g.infof("compiling provider %q", shortName)
 	providerPath := fmt.Sprintf("plugins/registry.terraform.io/hashicorp/%s/0.0.1/%s_%s", shortName, runtime.GOOS, runtime.GOARCH)
 	outFile := filepath.Join(tmpDir, providerPath, fmt.Sprintf("terraform-provider-%s", shortName))
+	g.infof("outfile %s", outFile)
 	switch runtime.GOOS {
 	case "windows":
 		outFile = outFile + ".exe"
