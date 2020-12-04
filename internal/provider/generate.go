@@ -10,6 +10,7 @@ import (
 	"runtime"
 	"strings"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/hashicorp/terraform-exec/tfexec"
 	"github.com/hashicorp/terraform-exec/tfinstall"
 	tfjson "github.com/hashicorp/terraform-json"
@@ -440,7 +441,7 @@ func (g *generator) terraformProviderSchema(ctx context.Context, providerName st
 	if err != nil {
 		return nil, err
 	}
-	defer os.RemoveAll(tmpDir)
+	// defer os.RemoveAll(tmpDir)
 
 	// tmpDir := "/tmp/tftmp"
 	// os.RemoveAll(tmpDir)
@@ -495,6 +496,8 @@ provider %[1]q {
 	}
 
 	if ps, ok := schemas.Schemas["registry.terraform.io/hashicorp/"+shortName]; ok {
+		spew.Dump(ps.ConfigSchema.Block)
+		// g.infof("ps %#v", )
 		return ps, nil
 	}
 
